@@ -1,15 +1,17 @@
-import { useEffect, useState } from "react";
+import React from 'react'
+import { useState , useEffect} from 'react'
+const infinite=()=>{
+    const[count,setCount]=useState(0);
 
-const useInfiniteEffectBug = () => {
-  const [count] = useState(0);
 
-  useEffect(() => {
-    // ❗ Infinite loop because count is being updated and also a dependency
-    // setCount triggers a rerender, causing useEffect to run again
-    // setCount(count + 1);
-  }, [count]);
+useEffect(()=>{
+    setCount(count+1);
+},[count] //run everytime count change 
+)
 
-  return count;
-};
-
-export default useInfiniteEffectBug;
+useEffect(()=>{
+    console.log("Appear one Time");
+},[]
+)
+}
+export default infinite
